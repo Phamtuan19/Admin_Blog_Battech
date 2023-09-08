@@ -9,7 +9,7 @@ type TypeButtonProps = React.ComponentProps<'button'> & {
 };
 
 function Button(props: TypeButtonProps) {
-   const { size, fullWidth, className, children } = props;
+   const { size, fullWidth, className, children, ...prop } = props;
 
    return (
       <button
@@ -19,6 +19,7 @@ function Button(props: TypeButtonProps) {
             'p-large': size === 'large',
             'w-full': fullWidth,
          })}
+         {...prop}
       >
          {children}
       </button>

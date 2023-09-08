@@ -6,7 +6,9 @@ export default {
     theme: {
         extend: {
             backgroundColor: {
-                default: '#186E25'
+                default: '#186E25',
+                sidebar: '#2A3444',
+                sidebarActive: '#3F4D63'
             },
             fontSize: {
                 default: '16px',
@@ -15,7 +17,8 @@ export default {
                 // base: '#186E25'
             },
             width: {
-                boxInput: '222px'
+                boxInput: '222px',
+                sidebar: '260px',
             },
             height: {
                 input: '1.4375em',
@@ -30,6 +33,9 @@ export default {
             },
             boxShadow: {
                 default: '0px 0px 4px 0px rgba(0, 0, 0, 0.25)'
+            },
+            margin: {
+                sidebar: '260px'
             }
         },
     },

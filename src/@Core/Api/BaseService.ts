@@ -2,7 +2,7 @@ import createInstance from './Axios';
 
 class BaseService {
    //
-   BASE_URL: string = import.meta.env.VITE_BASE_URL + '/api';
+   BASE_URL: string = 'http://localhost:5001' + '/api';
 
    BASE_ENDPOINT: string = '';
 
@@ -15,7 +15,7 @@ class BaseService {
    }
 
    setRequest() {
-      this.request = createInstance(this.BASE_URL);
+      this.request = createInstance(this.BASE_URL );
    }
 
    /**

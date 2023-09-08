@@ -4,16 +4,19 @@ import cn from '../helpers/cn';
 interface TypeLabel extends React.LabelHTMLAttributes<HTMLLabelElement> {
    id?: string;
    className?: string;
+   required?: boolean;
    children?: React.ReactNode;
 }
 
-function Lable(props: TypeLabel) {
-   const { id, className, children } = props;
+function Label(props: TypeLabel) {
+   const { id, className, required, children } = props;
 
    return (
       <div className={cn('mb-1', className)}>
-         <label htmlFor={id}>{children}</label>
+         <label htmlFor={id}>
+            {children} {required && <span className="text-[#E32D1C]">*</span>}
+         </label>
       </div>
    );
 }
-export default React.memo(Lable);
+export default React.memo(Label);

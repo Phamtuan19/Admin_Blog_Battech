@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cn from '../helpers/cn';
 
 interface TypeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,7 @@ interface TypeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
    placeholder?: string;
 }
 
-function Input(props: TypeInputProps) {
+const Input = forwardRef<HTMLInputElement, TypeInputProps>((props, ref) => {
    const { CTSize, fullWidth, className, ...prop } = props;
 
    return (
@@ -20,9 +20,9 @@ function Input(props: TypeInputProps) {
             'w-full': fullWidth,
          })}
       >
-         <input type="text" className={cn('w-full h-input outline-none block ')} {...prop} />
+         <input ref={ref} type="text" className={cn('w-full h-input outline-none block ')} {...prop} />
       </div>
    );
-}
+});
 
 export default React.memo(Input);

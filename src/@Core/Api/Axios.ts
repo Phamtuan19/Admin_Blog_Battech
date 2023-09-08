@@ -31,8 +31,6 @@ const createInstance = (baseURL: string) => {
          return response;
       },
       (error) => {
-         console.log(error.response.status);
-         console.log(error);
          // Bất kì mã trạng thái nào lọt ra ngoài tầm 2xx đều khiến hàm này được trigger\
          // Làm gì đó với lỗi response
          return Promise.reject(error);
