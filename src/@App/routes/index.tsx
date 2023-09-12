@@ -5,6 +5,12 @@ import PrivateRouter from './component/PrivateRouter';
 import MainLayout from '../component/Layout';
 import Home from '../pages/Home';
 import CreatePost from '../pages/CreatePost';
+import TopicPost from '../pages/TopicPost';
+import TopicPostCreate from '../pages/TopicPostCreate';
+import AuthorCreate from '../pages/AuthorCreate';
+import Author from '../pages/Author';
+import Tag from '../pages/Tag';
+import TagCreate from '../pages/TagCreate';
 
 const routes = [
    {
@@ -30,6 +36,48 @@ const routes = [
                {
                   path: 'create',
                   element: <CreatePost />,
+               },
+               {
+                  path: 'topic',
+                  element: <Outlet />,
+                  children: [
+                     {
+                        index: true,
+                        element: <TopicPost />,
+                     },
+                     {
+                        path: 'create',
+                        element: <TopicPostCreate />,
+                     },
+                  ],
+               },
+               {
+                  path: 'author',
+                  element: <Outlet />,
+                  children: [
+                     {
+                        index: true,
+                        element: <Author />,
+                     },
+                     {
+                        path: 'create',
+                        element: <AuthorCreate />,
+                     },
+                  ],
+               },
+               {
+                  path: 'tags',
+                  element: <Outlet />,
+                  children: [
+                     {
+                        index: true,
+                        element: <Tag />,
+                     },
+                     {
+                        path: 'create',
+                        element: <TagCreate />,
+                     },
+                  ],
                },
             ],
          },

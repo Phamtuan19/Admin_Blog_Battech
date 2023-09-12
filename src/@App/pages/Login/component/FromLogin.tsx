@@ -45,26 +45,26 @@ function FormLogin() {
    };
 
    return (
-      <div className="mt-10 w-full">
+      <div className="mt-16 w-full">
          <h1 className="text-2xl font-bold mb-4">Đăng nhập tài khoản</h1>
          <form onSubmit={handleSubmit(onSubmitForm)}>
             <div className="mb-5">
                <Label htmlFor="email" className="ml-4">
                   Email
                </Label>
-               <Input fullWidth className="rounded-3xl px-5" {...register('email')} />
+               <Input fullWidth className="rounded-3xl px-5 h-[50px]" {...register('email')} />
                <ErrorMessage errors={errors} name="email" as={<p className="text-red-400 text-default ml-4" />} />
             </div>
             <div className="mb-5">
                <Label htmlFor="password" className="ml-4">
                   Password
                </Label>
-               <Input fullWidth type="password" className="rounded-3xl px-5" {...register('password')} />
+               <Input fullWidth type="password" className="rounded-3xl px-5 h-[50px]" {...register('password')} />
                <ErrorMessage errors={errors} name="password" as={<p className="text-red-400 text-default ml-4" />} />
             </div>
             <div className="flex justify-between">
                <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-auto" id="remember-password" />
+                  <input type="checkbox" className="w-auto" id="remember-password"  />
                   <label htmlFor="remember-password">Nhớ mật khẩu</label>
                </div>
                <div className="">
@@ -74,7 +74,7 @@ function FormLogin() {
                </div>
             </div>
             <div className="mt-7">
-               <Button type="submit" fullWidth className="rounded-full bg-[#F27024] font-bold">
+               <Button type="submit" fullWidth className="rounded-full bg-[#F27024] font-bold h-[50px]">
                   Đăng nhập
                </Button>
             </div>

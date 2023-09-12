@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 const createInstance = (baseURL: string) => {
-   // const options: any = {
-   //    baseUrl: baseURL,
-   //    withCredentials: true,
-   // };
-
-   const axiosInstance = axios.create({
-      baseURL: baseURL,
+   const options: any = {
+      baseURL,
       withCredentials: true,
-   });
+      headers: {
+         'X-Requested-With': 'XMLHttpRequest',
+      },
+   };
+
+   const axiosInstance = axios.create(options);
 
    axiosInstance.interceptors.request.use(
       async (requestConfig) => {

@@ -1,3 +1,5 @@
+import { AxiosInstance } from 'axios';
+
 import createInstance from './Axios';
 
 class BaseService {
@@ -6,24 +8,20 @@ class BaseService {
 
    BASE_ENDPOINT: string = '';
 
-   request: any;
+   request: AxiosInstance;
 
    middleware: any;
 
    constructor() {
-      this.setRequest();
-   }
-
-   setRequest() {
-      this.request = createInstance(this.BASE_URL );
+      this.request = createInstance(this.BASE_URL);
    }
 
    /**
     * @param {Object} query
     * @returns
     */
-   get(query: object | null = null) {
-      return this.request.get(this.BASE_ENDPOINT, { query });
+   get(params: object | null = null) {
+      return this.request.get(this.BASE_ENDPOINT, { params });
    }
 
    /**
@@ -39,7 +37,7 @@ class BaseService {
     * @returns
     */
    create<T>(data: T) {
-      return this.request.post(this.BASE_ENDPOINT, { data });
+      return this.request.post(this.BASE_ENDPOINT + '/create', { data });
    }
 
    /**

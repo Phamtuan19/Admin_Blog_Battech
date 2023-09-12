@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import cn from '../../../../../@Core/helpers/cn';
-
 import { images } from '../../../../../assets';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useResolvedPath } from 'react-router-dom';
 
 interface TypeProps {
    path: string;
@@ -52,9 +51,13 @@ function SidebarItem(props: TypeProps) {
                      <NavLink
                         key={index}
                         to={`/${path}/${item.path}`}
-                        className={cn('block py-2 pl-11 rounded-lg hover:bg-sidebarActive', {
-                           'bg-sidebarActive': segments[1] === item.path,
-                        })}
+                        className={({ isActive }) => {
+                           return isActive
+                              ? cn('block py-2 pl-11 rounded-lg hover:bg-sidebarActive', {
+                                   'bg-sidebarActive': isActive,
+                                })
+                              : cn('block py-2 pl-11 rounded-lg hover:bg-sidebarActive');
+                        }}
                      >
                         <p>{item.title}</p>
                      </NavLink>

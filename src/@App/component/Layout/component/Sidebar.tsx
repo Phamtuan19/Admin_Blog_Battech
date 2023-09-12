@@ -20,15 +20,15 @@ const LISTSIDEBAR = [
             title: 'Thêm bài viết',
          },
          {
-            path: 'ádasd',
+            path: 'topic',
             title: 'Chủ đề',
          },
          {
-            path: '/tac-gia',
+            path: 'author',
             title: 'Tác giả',
          },
          {
-            path: '/tag',
+            path: 'tags',
             title: 'Tag',
          },
       ],
@@ -55,7 +55,7 @@ function Sidebar() {
             <div className={cn('py-5 px-2 flex flex-col gap-2 text-white')}>
                {LISTSIDEBAR.map((item, index) => {
                   if (item.children) {
-                     return <SidebarItem key={index} className={cn('')} {...item}></SidebarItem>;
+                     return <SidebarItem key={index} {...item}></SidebarItem>;
                   }
 
                   return (

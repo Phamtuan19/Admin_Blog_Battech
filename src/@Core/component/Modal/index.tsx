@@ -14,9 +14,13 @@ function Modal(props: TypeModal) {
    return (
       <>
          {open ? (
-            <div className={cn('fixed top-0 left-0 w-full h-[100vh] z-[99999] bg-[#00000080] overflow-hidden')}>
-               <div className="h-full flex justify-center items-center">
-                  <div className=" bg-white rounded-[32px]">{children}</div>
+            <div
+               className={cn('fixed top-0 left-0 right-0 bottom-0 w-full h-[100vh] z- bg-[#00000080] overflow-hidden')}
+            >
+               <div className="h-full w-full">
+                  <div className="h-full flex justify-center items-center">
+                     <div className=" bg-white rounded-[32px]">{children}</div>
+                  </div>
                </div>
             </div>
          ) : (
