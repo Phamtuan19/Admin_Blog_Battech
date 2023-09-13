@@ -3,6 +3,10 @@ import BaseService from '../../@Core/Api/BaseService';
 class PostService extends BaseService {
    BASE_ENDPOINT = 'posts';
 
+   getAllPosts() {
+      return this.get();
+   }
+
    createPost(data: any) {
       return this.request.post(this.BASE_ENDPOINT + '/create', data);
    }

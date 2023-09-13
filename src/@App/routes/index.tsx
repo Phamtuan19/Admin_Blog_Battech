@@ -11,6 +11,7 @@ import AuthorCreate from '../pages/AuthorCreate';
 import Author from '../pages/Author';
 import Tag from '../pages/Tag';
 import TagCreate from '../pages/TagCreate';
+import Post from '../pages/Post';
 
 const routes = [
    {
@@ -31,7 +32,7 @@ const routes = [
             children: [
                {
                   index: true,
-                  element: <h1>Danh sách bài viết</h1>,
+                  element: <Post />,
                },
                {
                   path: 'create',

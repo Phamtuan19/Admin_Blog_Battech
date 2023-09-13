@@ -16,8 +16,8 @@ const LISTSIDEBAR = [
       title: 'Viết bài',
       children: [
          {
-            path: 'create',
-            title: 'Thêm bài viết',
+            path: '/',
+            title: 'Bài viết',
          },
          {
             path: 'topic',
