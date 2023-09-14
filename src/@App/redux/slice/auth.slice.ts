@@ -16,7 +16,7 @@ const initialState: TypeAuthService = {
 
 const actionLoginAccount = createAsyncThunk(
    'auth/loginAccount',
-   async (data: { email: string; password: string }, thunkAPI) => {
+   async (data: { email: string; password: string }, _thunkAPI) => {
       try {
          const user = await authService.postLogin(data);
          return user;
@@ -50,18 +50,18 @@ const authSlice = createSlice({
    initialState,
    reducers: {},
    extraReducers: (builder) => {
-      builder.addCase(actionLoginAccount.fulfilled, (state, action) => {
+      builder.addCase(actionLoginAccount.fulfilled, (state, _action) => {
          state.isAuhthentication = true;
       });
-      builder.addCase(actionGetUser.fulfilled, (state, action) => {
+      builder.addCase(actionGetUser.fulfilled, (state, _action) => {
          // state.user = action.payload?.user;
          state.isAuhthentication = true;
          state.isInitialized = true;
       });
-      builder.addCase(actionGetUser.rejected, (state, action) => {
+      builder.addCase(actionGetUser.rejected, (state, _action) => {
          state.isInitialized = true;
       });
-      builder.addCase(actionLogout.fulfilled, (state, action) => {
+      builder.addCase(actionLogout.fulfilled, (state, _action) => {
          state.user = null;
          state.isAuhthentication = false;
       });

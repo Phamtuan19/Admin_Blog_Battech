@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAuth } from '../../../../redux/slice/auth.slice';
 import Button from '../../../../../@Core/component/Button';
 import logOut from '../svg/logOut.svg';

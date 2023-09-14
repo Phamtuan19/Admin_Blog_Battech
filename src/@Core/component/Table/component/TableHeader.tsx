@@ -7,7 +7,7 @@ interface TableHeader {
 }
 
 function TableHeader(props: TableHeader): JSX.Element {
-   const { data, columns } = props;
+   const { columns } = props;
    console.log(columns);
 
    return (

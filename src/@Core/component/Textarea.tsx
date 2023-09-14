@@ -9,7 +9,7 @@ interface TypeProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
    placeholder?: string;
 }
 
-const Textarea = forwardRef<HTMLInputElement, TypeProps>((props, ref) => {
+const Textarea = forwardRef<HTMLInputElement, TypeProps>((props) => {
    const { size, fullWidth, className, ...prop } = props;
 
    return (

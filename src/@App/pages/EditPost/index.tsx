@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -86,7 +86,7 @@ function EditPost() {
                newImage = data.image;
             }
 
-            const response = await postService.updatePost(postId, { ...data, image: newImage });
+            await postService.updatePost(postId, { ...data, image: newImage });
             refetch();
          }
       } catch (error) {

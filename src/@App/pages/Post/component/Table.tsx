@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import postService from '../../../services/posts.service';
 import { images } from '../../../../assets';
@@ -55,7 +55,7 @@ function Table() {
          isButtonOk: true,
          callback: () => {
             try {
-               const res = postService.deletePost(id);
+               postService.deletePost(id);
                console.log('xóa thành công');
                refetch();
             } catch (error) {
@@ -65,24 +65,24 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id: string) => {
-      setConfirm({
-         isIcon: true,
-         title: 'Sao chép bài viết',
-         content: 'Bạn có chắc muốn xóa bài viết này hay không?',
-         confirmOk: 'Xóa',
-         isButtonOk: true,
-         callback: () => {
-            try {
-               const res = postService.deletePost(id);
-               console.log('xóa thành công');
-               refetch();
-            } catch (error) {
-               console.log('Xóa thất bại');
-            }
-         },
-      });
-   };
+   // const handleClickCoppy = async (id: string) => {
+   //    setConfirm({
+   //       isIcon: true,
+   //       title: 'Sao chép bài viết',
+   //       content: 'Bạn có chắc muốn xóa bài viết này hay không?',
+   //       confirmOk: 'Xóa',
+   //       isButtonOk: true,
+   //       callback: () => {
+   //          try {
+   //             const res = postService.deletePost(id);
+   //             console.log('xóa thành công');
+   //             refetch();
+   //          } catch (error) {
+   //             console.log('Xóa thất bại');
+   //          }
+   //       },
+   //    });
+   // };
 
    const columns = ['ID', 'Tên bài viết', 'Mô tả', 'Chủ đề', 'Tác giả', 'Ngày đăng bài', 'Thao tác'];
    return (

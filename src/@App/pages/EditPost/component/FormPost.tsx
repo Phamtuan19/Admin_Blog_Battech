@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Label from '../../../../@Core/component/Label';
 import ControlTextarea from '../../../../@Core/component/ControllForm/ControlTextarea';
@@ -10,10 +10,12 @@ import ControlSelect from '../../../../@Core/component/ControllForm/ControlSelec
 import { useQuery, useQueryClient } from 'react-query';
 import changeToSlug from '../../../../@Core/helpers/createSlug';
 import { format } from 'date-fns';
-import postService from '../../../services/posts.service';
+import topicService from '../../../services/topic.service';
+import authorService from '../../../services/author.service';
+import tagService from '../../../services/tag.service';
 
 export default function FormPost(props: any) {
-   const { register, setValue, watch, control, errors, image } = props;
+   const { register, setValue, watch, control, errors } = props;
 
    const queryClient = useQueryClient();
 
@@ -22,17 +24,17 @@ export default function FormPost(props: any) {
    };
 
    const queryTopic = useQuery('Topic', async () => {
-      const res = await postService.getAllTopics();
+      const res = await topicService.getAllTopics();
       return res.data;
    });
 
    const queryAuthor = useQuery('Author', async () => {
-      const res = await postService.getAllAuthors();
+      const res = await authorService.getAll();
       return res.data;
    });
 
    const queryTag = useQuery('Tags', async () => {
-      const res = await postService.getAllTags();
+      const res = await tagService.getAll();
       return res.data;
    });
 
@@ -177,7 +179,7 @@ export default function FormPost(props: any) {
                      <h1 className="font-bold">Hình ảnh</h1>
                   </div>
                   <div className="p-2 ">
-                     <img src={watch('image') || ''} alt="" className='w-full'  />
+                     <img src={watch('image') || ''} alt="" className="w-full" />
                   </div>
                </div>
             </div>

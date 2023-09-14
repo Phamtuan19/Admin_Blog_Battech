@@ -20,7 +20,7 @@ function Filter(props: { filterActions: any }) {
    const { filterActions } = props;
    const { search, category, sortBy, setSearch, setCategory, setSortBy } = useSearchParamFilterTableUrl();
    const [searchVal, setSearchVal] = useState<string>(search || '');
-   const [categoryVal, setCategoryVal] = useState<string>(category || '');
+   const [categoryVal] = useState<string>(category || '');
 
    const handleClickSearch = () => {
       if (searchVal && categoryVal) {

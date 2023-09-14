@@ -1,4 +1,3 @@
-import React from 'react';
 import PaginationItem from './component/PaginationItem';
 import cn from '../../helpers/cn';
 import useSearchParamFilterTableUrl from './hook/useSearchParamFilterTableUrl';

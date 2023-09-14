@@ -24,7 +24,7 @@ type TypeTableProps = React.ComponentProps<'table'> & {
 function Table(props: TypeTableProps) {
    const { data, columns } = props;
 
-   const dataTable = [data, columns];
+   // const dataTable = [data, columns];
 
    return (
       <div className="my-4 rounded-2xl ">

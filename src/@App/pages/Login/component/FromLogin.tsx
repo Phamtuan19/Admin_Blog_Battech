@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 import Button from '../../../../@Core/component/Button';
 import ERROR_VALIDATION from '../../../../@Core/config/ErrorValidation';
 import regexs from '../../../../@Core/config/Regex';
-import authService from '../../../services/auth.service';
 import Input from '../../../../@Core/component/Input';
 import Label from '../../../../@Core/component/Label';
 import { useAuth } from '../../../redux/slice/auth.slice';

@@ -14,7 +14,7 @@ interface TypeControlEditor<TFieldValues extends FieldValues = FieldValues> {
 }
 
 function ControlEditor<TFieldValues extends FieldValues = FieldValues>(props: TypeControlEditor<TFieldValues>) {
-   const { control, name, setValue, defaultValue, ...rest } = props;
+   const { control, name, setValue } = props;
 
    return (
       <Controller

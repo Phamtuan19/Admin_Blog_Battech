@@ -1,4 +1,4 @@
-import React, { forwardRef, SelectHTMLAttributes } from 'react';
+import { forwardRef, SelectHTMLAttributes } from 'react';
 import cn from '../helpers/cn';
 
 export interface TypeSelect extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -10,7 +10,7 @@ export interface TypeSelect extends SelectHTMLAttributes<HTMLSelectElement> {
    keyTitle: string;
 }
 
-const Select = forwardRef<HTMLSelectElement, TypeSelect>((props, ref) => {
+const Select = forwardRef<HTMLSelectElement, TypeSelect>((props, _ref) => {
    const { CTSize, fullWidth, className, options, keyValue, keyTitle, ...rest } = props;
    return (
       <div

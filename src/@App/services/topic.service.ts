@@ -3,7 +3,7 @@ import BaseService from '../../@Core/Api/BaseService';
 class TopicService extends BaseService {
    BASE_ENDPOINT = 'topic';
 
-   getAllTopics(data: any) {
+   getAllTopics(data?: any) {
       return this.request.get(this.BASE_ENDPOINT + '/all', { params: data });
    }
 

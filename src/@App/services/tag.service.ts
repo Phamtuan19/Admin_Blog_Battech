@@ -3,7 +3,7 @@ import BaseService from '../../@Core/Api/BaseService';
 class TagService extends BaseService {
    BASE_ENDPOINT = 'tags';
 
-   getAll(query: any) {
+   getAll(query?: any) {
       return this.get(query);
    }
 

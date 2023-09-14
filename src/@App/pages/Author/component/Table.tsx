@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
@@ -58,24 +58,24 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id: string) => {
-      setConfirm({
-         isIcon: true,
-         title: 'Sao chép bài viết',
-         content: 'Bạn có chắc muốn xóa bài viết này hay không?',
-         confirmOk: 'Xóa',
-         isButtonOk: true,
-         callback: () => {
-            try {
-               // const res = postService.deletePost(id);
-               // console.log('xóa thành công');
-               // refetch();
-            } catch (error) {
-               console.log('Xóa thất bại');
-            }
-         },
-      });
-   };
+   // const handleClickCoppy = async (id: string) => {
+   //    setConfirm({
+   //       isIcon: true,
+   //       title: 'Sao chép bài viết',
+   //       content: 'Bạn có chắc muốn xóa bài viết này hay không?',
+   //       confirmOk: 'Xóa',
+   //       isButtonOk: true,
+   //       callback: () => {
+   //          try {
+   //             // const res = postService.deletePost(id);
+   //             // console.log('xóa thành công');
+   //             // refetch();
+   //          } catch (error) {
+   //             console.log('Xóa thất bại');
+   //          }
+   //       },
+   //    });
+   // };
 
    console.log(authors?.data);
 

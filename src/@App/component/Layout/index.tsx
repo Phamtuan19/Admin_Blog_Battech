@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './component/Sidebar';
 import cn from '../../../@Core/helpers/cn';

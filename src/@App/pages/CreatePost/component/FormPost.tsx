@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Label from '../../../../@Core/component/Label';
 import ControlTextarea from '../../../../@Core/component/ControllForm/ControlTextarea';
@@ -7,12 +7,12 @@ import ControlInput from '../../../../@Core/component/ControllForm/ControlInput'
 import { images } from '../../../../assets';
 import { ErrorMessage } from '@hookform/error-message';
 import ControlSelect from '../../../../@Core/component/ControllForm/ControlSelect';
-import ERORR_VALIDATION from '../../../../@Core/config/ErrorValidation';
 import { useQuery, useQueryClient } from 'react-query';
-import postService from '../../../services/posts.service';
 import changeToSlug from '../../../../@Core/helpers/createSlug';
-import { getBase64 } from '../utils';
 import { format } from 'date-fns';
+import topicService from '../../../services/topic.service';
+import authorService from '../../../services/author.service';
+import tagService from '../../../services/tag.service';
 
 export default function FormPost(props: any) {
    const { register, setValue, watch, control, errors } = props;
@@ -24,17 +24,17 @@ export default function FormPost(props: any) {
    };
 
    const queryTopic = useQuery('getTopic', async () => {
-      const res = await postService.getAllTopics();
+      const res = await topicService.getAllTopics();
       return res.data;
    });
 
    const queryAuthor = useQuery('getAuthor', async () => {
-      const res = await postService.getAllAuthors();
+      const res = await authorService.getAll();
       return res.data;
    });
 
    const queryTag = useQuery('getTags', async () => {
-      const res = await postService.getAllTags();
+      const res = await tagService.getAll();
       return res.data;
    });
 

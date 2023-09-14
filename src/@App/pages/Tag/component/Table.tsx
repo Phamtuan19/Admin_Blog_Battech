@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
-import postService from '../../../services/posts.service';
 import { images } from '../../../../assets';
 import cn from '../../../../@Core/helpers/cn';
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 import TableHeader from '../../../component/customs/TableHeader';
-import { format } from 'date-fns';
 import Filter from '../../../component/customs/Filter';
 import TableFooter from '../../../component/customs/TableFooter';
 import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
@@ -66,24 +64,24 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id: string) => {
-      setConfirm({
-         isIcon: true,
-         title: 'Sao chép bài viết',
-         content: 'Bạn có chắc muốn xóa bài viết này hay không?',
-         confirmOk: 'Xóa',
-         isButtonOk: true,
-         callback: () => {
-            try {
-               // const res = postService.deletePost(id);
-               console.log('xóa thành công');
-               refetch();
-            } catch (error) {
-               console.log('Xóa thất bại');
-            }
-         },
-      });
-   };
+   // const handleClickCoppy = async (id: string) => {
+   //    setConfirm({
+   //       isIcon: true,
+   //       title: 'Sao chép bài viết',
+   //       content: 'Bạn có chắc muốn xóa bài viết này hay không?',
+   //       confirmOk: 'Xóa',
+   //       isButtonOk: true,
+   //       callback: () => {
+   //          try {
+   //             // const res = postService.deletePost(id);
+   //             console.log('xóa thành công');
+   //             refetch();
+   //          } catch (error) {
+   //             console.log('Xóa thất bại');
+   //          }
+   //       },
+   //    });
+   // };
 
    const columns = ['Tag', 'Thao tác'];
    return (

@@ -1,4 +1,3 @@
-import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -21,7 +20,7 @@ type MySchema = yup.InferType<typeof schemaFrom>;
 function EditAuthor() {
    const { authorId } = useParams();
 
-   const { handleSubmit, control, reset, setValue } = useForm<MySchema>({
+   const { handleSubmit, control, setValue } = useForm<MySchema>({
       resolver: yupResolver(schemaFrom),
    });
 

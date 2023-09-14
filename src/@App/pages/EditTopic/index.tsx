@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { images } from '../../../assets';
 import Button from '../../../@Core/component/Button';
 import Label from '../../../@Core/component/Label';

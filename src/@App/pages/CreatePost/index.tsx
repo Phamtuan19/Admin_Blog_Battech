@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -45,7 +44,7 @@ function CreatePost() {
       try {
          const fileImage = await getBase64(data.image as File);
 
-         const response = await postService.createPost({ ...data, image: fileImage });
+         await postService.createPost({ ...data, image: fileImage });
          reset();
       } catch (error) {
          console.log(error);

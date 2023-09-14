@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import cn from '../../../../../@Core/helpers/cn';
 import { images } from '../../../../../assets';
-import { NavLink, useResolvedPath } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 interface TypeProps {
    title: string;
@@ -13,9 +13,9 @@ interface TypeProps {
 function SidebarItem(props: TypeProps) {
    const { title, icon, children, className } = props;
 
-   const segments: string[] = useMemo(() => {
-      return window.location.pathname.split('/').filter((segment) => segment.trim() !== '');
-   }, []);
+   // const segments: string[] = useMemo(() => {
+   //    return window.location.pathname.split('/').filter((segment) => segment.trim() !== '');
+   // }, []);
 
    const [openChildren, setOpenChildren] = useState<boolean>(false);
 

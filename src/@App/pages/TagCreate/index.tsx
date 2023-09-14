@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../../../@Core/component/Button';
 import { images } from '../../../assets';
 import Label from '../../../@Core/component/Label';
@@ -16,7 +15,7 @@ const schemaFrom = yup.object().shape({
 type MySchema = yup.InferType<typeof schemaFrom>;
 
 function TagCreate() {
-   const { handleSubmit, control, watch, setValue } = useForm<MySchema>({
+   const { handleSubmit, control } = useForm<MySchema>({
       resolver: yupResolver(schemaFrom),
    });
 

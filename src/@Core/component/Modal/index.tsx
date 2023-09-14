@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import cn from '../../helpers/cn';
-import Button from '../Button';
 
 interface TypeModal {
    open: boolean;

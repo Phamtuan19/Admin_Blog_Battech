@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import postService from '../../../services/posts.service';
 import { images } from '../../../../assets';
 import cn from '../../../../@Core/helpers/cn';
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
@@ -49,7 +48,7 @@ function Table() {
          isButtonOk: true,
          callback: () => {
             try {
-               const res = topicService.deleteTopic(id);
+               topicService.deleteTopic(id);
                refetch();
             } catch (error) {
                console.log('Xóa thất bại');
@@ -58,24 +57,24 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id: string) => {
-      setConfirm({
-         isIcon: true,
-         title: 'Sao chép bài viết',
-         content: 'Bạn có chắc muốn xóa bài viết này hay không?',
-         confirmOk: 'Xóa',
-         isButtonOk: true,
-         callback: () => {
-            try {
-               const res = postService.deletePost(id);
-               console.log('xóa thành công');
-               refetch();
-            } catch (error) {
-               console.log('Xóa thất bại');
-            }
-         },
-      });
-   };
+   // const handleClickCoppy = async (id: string) => {
+   //    setConfirm({
+   //       isIcon: true,
+   //       title: 'Sao chép bài viết',
+   //       content: 'Bạn có chắc muốn xóa bài viết này hay không?',
+   //       confirmOk: 'Xóa',
+   //       isButtonOk: true,
+   //       callback: () => {
+   //          try {
+   //             const res = postService.deletePost(id);
+   //             console.log('xóa thành công');
+   //             refetch();
+   //          } catch (error) {
+   //             console.log('Xóa thất bại');
+   //          }
+   //       },
+   //    });
+   // };
 
    const columns = ['ID', 'Tên chủ đề', 'Slug', 'số bài viết', 'Thao tác'];
    return (
