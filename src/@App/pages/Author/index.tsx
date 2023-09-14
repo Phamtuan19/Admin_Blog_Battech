@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../../@Core/component/Button';
 import { images } from '../../../assets';
 import { useNavigate } from 'react-router-dom';
+import Table from './component/Table';
 
 function Author() {
    const navigate = useNavigate();
@@ -18,6 +19,9 @@ function Author() {
                   Thêm tác giả
                </Button>
             </div>
+         </div>
+         <div className="my-4 rounded-2xl">
+            <Table />
          </div>
       </div>
    );

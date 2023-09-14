@@ -2,23 +2,8 @@ import React, { useState } from 'react';
 import Button from '../../../../@Core/component/Button';
 import { images } from '../../../../assets';
 import Input from '../../../../@Core/component/Input';
-import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook';
+import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 import Dropdown from './component/Dropdown';
-
-const FILTERACTIONS = [
-   {
-      value: 'name',
-      title: 'Tên bài viết',
-   },
-   {
-      value: 'description',
-      title: 'Mô tả',
-   },
-   {
-      value: 'topic',
-      title: 'chủ đề',
-   },
-];
 
 const SORTBYACTIONS = [
    {
@@ -31,14 +16,15 @@ const SORTBYACTIONS = [
    },
 ];
 
-function Filter() {
+function Filter(props: { filterActions: any }) {
+   const { filterActions } = props;
    const { search, category, sortBy, setSearch, setCategory, setSortBy } = useSearchParamFilterTableUrl();
    const [searchVal, setSearchVal] = useState<string>(search || '');
    const [categoryVal, setCategoryVal] = useState<string>(category || '');
 
    const handleClickSearch = () => {
       if (searchVal && categoryVal) {
-         setSearch(searchVal.trim());
+         setSearch(searchVal);
       }
    };
 
@@ -61,7 +47,7 @@ function Filter() {
             <div className="">
                <Dropdown
                   defaultValue={category || 'Bộ lọc'}
-                  options={FILTERACTIONS}
+                  options={filterActions}
                   image={images.filter}
                   callback={setCategory}
                />

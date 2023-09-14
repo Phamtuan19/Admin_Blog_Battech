@@ -15,7 +15,7 @@ function ControlSelect<TFieldValues extends FieldValues = FieldValues>(props: Ty
          render={({ field, fieldState: { error } }) => {
             return (
                <React.Fragment>
-                  <Select {...res} {...field} />
+                  <Select {...field} value={field.value || ''} {...res} />
                   {error && <span className="text-red-500">{error?.message}</span>}
                </React.Fragment>
             );

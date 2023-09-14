@@ -11,6 +11,7 @@ import TableFooter from '../../../component/customs/TableFooter';
 import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
 import { useConfirm } from '../../../../@Core/component/Comfirm';
 import { Link } from 'react-router-dom';
+import tagService from '../../../services/tag.service';
 
 const FILTERACTIONS = [
    {
@@ -33,12 +34,13 @@ function Table() {
    const { setConfirm } = useConfirm();
 
    const {
-      data: postsList,
+      data: dataTags,
       isFetching,
       refetch,
    } = useQuery<any>(['getPosts', page, limit, category, search, sortBy], async () => {
       try {
-         const res = await postService.getAllPosts({ page, limit, category, search, sortBy });
+         const res = await tagService.getAll({ page, limit, category, search, sortBy });
+         console.log(res);
          return res;
       } catch (error) {
          console.log(error);
@@ -55,8 +57,7 @@ function Table() {
          isButtonOk: true,
          callback: () => {
             try {
-               const res = postService.deletePost(id);
-               console.log('xóa thành công');
+               tagService.deleteTag(id);
                refetch();
             } catch (error) {
                console.log('Xóa thất bại');
@@ -74,7 +75,7 @@ function Table() {
          isButtonOk: true,
          callback: () => {
             try {
-               const res = postService.deletePost(id);
+               // const res = postService.deletePost(id);
                console.log('xóa thành công');
                refetch();
             } catch (error) {
@@ -84,7 +85,7 @@ function Table() {
       });
    };
 
-   const columns = ['ID', 'Tên bài viết', 'Mô tả', 'Chủ đề', 'Tác giả', 'Ngày đăng bài', 'Thao tác'];
+   const columns = ['Tag', 'Thao tác'];
    return (
       <>
          <div className="mb-2 flex justify-between ">
@@ -96,30 +97,23 @@ function Table() {
                <tbody>
                   {isFetching ? (
                      <SekeletonLoadingTable columns={columns} />
-                  ) : postsList?.data && postsList.data.length > 0 ? (
-                     postsList?.data.map((post: any, index: number) => {
+                  ) : dataTags?.data && dataTags.data.length > 0 ? (
+                     dataTags?.data.map((tag: any, index: number) => {
                         return (
                            <tr key={index}>
-                              <ExtendTdTable>
+                              <ExtendTdTable width={50} className="text-center">
                                  <input type="checkbox" className="w-[15px] h-[15px]" />
                               </ExtendTdTable>
-                              <ExtendTdTable width={50}>{index + 1}</ExtendTdTable>
-                              <ExtendTdTable>{post.name}</ExtendTdTable>
-                              <ExtendTdTable className="w-[400px]">{post.description}</ExtendTdTable>
-                              <ExtendTdTable width={250}>{post.topicId.name}</ExtendTdTable>
-                              <ExtendTdTable width={180}>{post.authorId.name}</ExtendTdTable>
-                              <ExtendTdTable className="text-center" width={150}>
-                                 {format(new Date(post.createdAt), 'MM/dd/yyyy')}
-                              </ExtendTdTable>
+                              <ExtendTdTable>{tag.name}</ExtendTdTable>
                               <ExtendTdTable width={100}>
                                  <div className="flex gap-2 justify-center">
                                     <span className="cursor-pointer">
                                        <img src={images.coppy} alt="" />
                                     </span>
-                                    <Link to={post._id} className="cursor-pointer">
+                                    <Link to={tag._id} className="cursor-pointer">
                                        <img src={images.edit} alt="" />
                                     </Link>
-                                    <span className="cursor-pointer" onClick={() => handleClickDelete(post._id)}>
+                                    <span className="cursor-pointer" onClick={() => handleClickDelete(tag._id)}>
                                        <img src={images.delete1} alt="" />
                                     </span>
                                  </div>
@@ -135,7 +129,7 @@ function Table() {
                      </tr>
                   )}
                </tbody>
-               <TableFooter colSpan={columns.length + 1} totalPage={postsList?.totalPage || 1} />
+               <TableFooter colSpan={columns.length + 1} totalPage={dataTags?.totalPage || 1} />
             </table>
          </div>
       </>

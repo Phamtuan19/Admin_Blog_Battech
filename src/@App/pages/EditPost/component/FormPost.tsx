@@ -7,15 +7,13 @@ import ControlInput from '../../../../@Core/component/ControllForm/ControlInput'
 import { images } from '../../../../assets';
 import { ErrorMessage } from '@hookform/error-message';
 import ControlSelect from '../../../../@Core/component/ControllForm/ControlSelect';
-import ERORR_VALIDATION from '../../../../@Core/config/ErrorValidation';
 import { useQuery, useQueryClient } from 'react-query';
-import postService from '../../../services/posts.service';
 import changeToSlug from '../../../../@Core/helpers/createSlug';
-import { getBase64 } from '../utils';
 import { format } from 'date-fns';
+import postService from '../../../services/posts.service';
 
 export default function FormPost(props: any) {
-   const { register, setValue, watch, control, errors } = props;
+   const { register, setValue, watch, control, errors, image } = props;
 
    const queryClient = useQueryClient();
 
@@ -23,17 +21,17 @@ export default function FormPost(props: any) {
       setValue('slug', changeToSlug(watch('name')));
    };
 
-   const queryTopic = useQuery('getTopic', async () => {
+   const queryTopic = useQuery('Topic', async () => {
       const res = await postService.getAllTopics();
       return res.data;
    });
 
-   const queryAuthor = useQuery('getAuthor', async () => {
+   const queryAuthor = useQuery('Author', async () => {
       const res = await postService.getAllAuthors();
       return res.data;
    });
 
-   const queryTag = useQuery('getTags', async () => {
+   const queryTag = useQuery('Tags', async () => {
       const res = await postService.getAllTags();
       return res.data;
    });
@@ -41,9 +39,9 @@ export default function FormPost(props: any) {
    useEffect(() => {
       (async () => {
          await Promise.all([
-            queryClient.getQueryData('getTopic'),
-            queryClient.getQueryData('getAuthor'),
-            queryClient.getQueryData('getTags'),
+            queryClient.getQueryData('Topic'),
+            queryClient.getQueryData('Author'),
+            queryClient.getQueryData('Tags'),
          ]);
       })();
    }, []);
@@ -172,6 +170,14 @@ export default function FormPost(props: any) {
                   <div className="p-3 flex justify-between items-center">
                      <span>Ngày viết: </span>
                      <span>{format(new Date(), 'yyyy-MM-dd HH:mm:ss')}</span>
+                  </div>
+               </div>
+               <div className="mt-3 bg-white rounded-lg">
+                  <div className="px-3 py-[10px] border-b border-b-solid border-b-[#E3E5E8]  ">
+                     <h1 className="font-bold">Hình ảnh</h1>
+                  </div>
+                  <div className="p-2 ">
+                     <img src={watch('image') || ''} alt="" className='w-full'  />
                   </div>
                </div>
             </div>

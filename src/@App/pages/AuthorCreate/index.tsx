@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import ERORR_VALIDATION from '../../../@Core/config/ErrorValidation';
-import postService from '../../services/posts.service';
+import authorService from '../../services/author.service';
 
 const schemaFrom = yup.object().shape({
    name: yup.string().required(`Tên chủ đề ${ERORR_VALIDATION.required}`),
@@ -23,7 +23,7 @@ function AuthorCreate() {
 
    const onSubmitForm = async (data: MySchema) => {
       try {
-         const res = await postService.createAuthor(data);
+         const res = await authorService.createAuthor(data);
          console.log(res);
          reset();
       } catch (error) {}

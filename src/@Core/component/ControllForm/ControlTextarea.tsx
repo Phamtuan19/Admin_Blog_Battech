@@ -18,7 +18,13 @@ function ControlTextarea<TFieldValues extends FieldValues = FieldValues>(props: 
          render={({ field, fieldState: { error } }) => {
             return (
                <React.Fragment>
-                  <Textarea placeholder={placeholder} {...field} className={className} defaultValue={defaultValue} />
+                  <Textarea
+                     placeholder={placeholder}
+                     className={className}
+                     {...field}
+                     value={field.value || ''}
+                     defaultValue={defaultValue}
+                  />
                   {error && <span className="text-red-500">{error?.message}</span>}
                </React.Fragment>
             );

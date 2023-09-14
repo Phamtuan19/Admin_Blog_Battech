@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import ERORR_VALIDATION from '../../../@Core/config/ErrorValidation';
 import changeToSlug from '../../../@Core/helpers/createSlug';
-import postService from '../../services/posts.service';
+import topicService from '../../services/topic.service';
 
 const schemaFrom = yup.object().shape({
    name: yup.string().required(`Tên chủ đề ${ERORR_VALIDATION.required}`),
@@ -28,7 +28,7 @@ function TopicPostCreate() {
 
    const onSubmitForm = async (data: MySchema) => {
       try {
-         const res = await postService.createTopic(data);
+         const res = await topicService.createTopic(data);
          console.log(res);
       } catch (error) {}
    };

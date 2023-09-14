@@ -16,7 +16,7 @@ function ControlInput<TFieldValues extends FieldValues = FieldValues>(props: Typ
       <Controller
          render={({ field, fieldState: { error } }) => (
             <React.Fragment>
-               <Input fullWidth={fullWidth} {...field} {...rest} value={field.value || defaultValue || ''} />
+               <Input fullWidth={fullWidth} {...field} {...rest} value={field.value || ''} />
                {error && <span className="text-red-500">{error?.message}</span>}
             </React.Fragment>
          )}

@@ -29,7 +29,7 @@ class BaseService {
     * @returns
     */
    find(id: string) {
-      return this.request.get(this.BASE_ENDPOINT + id);
+      return this.request.get(this.BASE_ENDPOINT + '/' + id);
    }
 
    /**
@@ -37,7 +37,7 @@ class BaseService {
     * @returns
     */
    create<T>(data: T) {
-      return this.request.post(this.BASE_ENDPOINT + '/create', { data });
+      return this.request.post(this.BASE_ENDPOINT + '/create', { body: data });
    }
 
    /**
@@ -45,7 +45,7 @@ class BaseService {
     * @returns
     */
    update<T>(data: T, id: number | string) {
-      return this.request.put(this.BASE_ENDPOINT + id, data);
+      return this.request.put(this.BASE_ENDPOINT + '/' + id, data);
    }
 
    /**
@@ -53,7 +53,7 @@ class BaseService {
     * @returns
     */
    delete(id: string | number) {
-      return this.request.delete(this.BASE_ENDPOINT + id);
+      return this.request.delete(this.BASE_ENDPOINT + '/' + id);
    }
 }
 

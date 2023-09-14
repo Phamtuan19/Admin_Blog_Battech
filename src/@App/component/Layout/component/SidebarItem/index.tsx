@@ -4,7 +4,6 @@ import { images } from '../../../../../assets';
 import { NavLink, useResolvedPath } from 'react-router-dom';
 
 interface TypeProps {
-   path: string;
    title: string;
    icon: string;
    children: { path: string; title: string }[];
@@ -12,7 +11,7 @@ interface TypeProps {
 }
 
 function SidebarItem(props: TypeProps) {
-   const { path, title, icon, children, className } = props;
+   const { title, icon, children, className } = props;
 
    const segments: string[] = useMemo(() => {
       return window.location.pathname.split('/').filter((segment) => segment.trim() !== '');
@@ -24,15 +23,15 @@ function SidebarItem(props: TypeProps) {
       setOpenChildren((prev) => !prev);
    };
 
-   useEffect(() => {
-      segments[0] === path && setOpenChildren(true);
-   }, [segments]);
+   // useEffect(() => {
+   //    segments[0] === path && setOpenChildren(true);
+   // }, [segments]);
 
    return (
       <div className={cn('rounded-m cursor-pointer ', className)}>
          <div
             className={cn('p-3 flex mb-2 hover:bg-sidebarActive rounded-lg', {
-               'bg-sidebarActive': segments[0] === path,
+               // 'bg-sidebarActive': segments[0] === path,
             })}
             onClick={handleClickOpen}
          >
@@ -50,7 +49,7 @@ function SidebarItem(props: TypeProps) {
                   return (
                      <NavLink
                         key={index}
-                        to={`/${path}/${item.path}`}
+                        to={`/${item.path}`}
                         className={({ isActive }) => {
                            return isActive
                               ? cn('block py-2 pl-11 rounded-lg hover:bg-sidebarActive', {

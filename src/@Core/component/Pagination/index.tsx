@@ -1,7 +1,7 @@
 import React from 'react';
 import PaginationItem from './component/PaginationItem';
 import cn from '../../helpers/cn';
-import useSearchParamFilterTableUrl from './hook';
+import useSearchParamFilterTableUrl from './hook/useSearchParamFilterTableUrl';
 
 function Pagination(props: { totalPage: number }) {
    const perPage = 1;

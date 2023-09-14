@@ -27,6 +27,7 @@ function ControlEditor<TFieldValues extends FieldValues = FieldValues>(props: Ty
                         const data = editor.getData();
                         setValue(name, data);
                      }}
+                     data={field.value || ''}
                   />
                   {error && <span className="text-red-500">{error?.message}</span>}
                </React.Fragment>

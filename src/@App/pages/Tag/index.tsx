@@ -2,6 +2,7 @@ import React from 'react';
 import { images } from '../../../assets';
 import Button from '../../../@Core/component/Button';
 import { useNavigate } from 'react-router-dom';
+import Table from './component/Table';
 
 function Tag() {
    const navigate = useNavigate();
@@ -18,6 +19,9 @@ function Tag() {
                   Thêm Tag
                </Button>
             </div>
+         </div>
+         <div className="my-4 rounded-2xl">
+            <Table />
          </div>
       </div>
    );

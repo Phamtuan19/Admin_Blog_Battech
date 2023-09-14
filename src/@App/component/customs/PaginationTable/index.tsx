@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from '../../../../@Core/component/Pagination';
-import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook';
+import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 
 const TOTALOPTIONS = [10, 20, 30, 40, 50];
 

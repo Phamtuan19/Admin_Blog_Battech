@@ -11,12 +11,11 @@ import Account from './Account';
 
 const LISTSIDEBAR = [
    {
-      path: 'posts',
       icon: nodeBook,
       title: 'Viết bài',
       children: [
          {
-            path: '',
+            path: 'posts',
             title: 'Bài viết',
          },
          {
