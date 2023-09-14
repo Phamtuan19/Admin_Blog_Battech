@@ -1,34 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Pagination from '../../../../@Core/component/Pagination';
-import { boolean } from 'yup';
-import { useSearchParams } from 'react-router-dom';
-
-interface TypePaginationTable {
-   currentPage?: number;
-   totalPage?: number;
-   totalItem?: number;
-   callBackIsFetch?: Function;
-}
+import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook';
 
 const TOTALOPTIONS = [10, 20, 30, 40, 50];
 
-function PaginationTable(props: TypePaginationTable) {
-   const [searchParams, setSearchParams] = useSearchParams();
-
-   const [currentPage, setPage] = useState<number>(props.currentPage || Number(searchParams.get('page')) || 1);
-   const [totalPage, setTotalPage] = useState<number>(props.totalPage || 1);
-   const [totalItemPage, setTotalItemPage] = useState<number>(props.totalItem || 10);
+function PaginationTable(props: { totalPage: number }) {
+   const { limit, setLimit } = useSearchParamFilterTableUrl();
 
    return (
       <div className="w-full bg-[#E3E5E8] h-[50px] flex items-center justify-between px-3">
          <div className="">
             <select
                name=""
-               value={totalItemPage}
+               value={limit}
                className="px-3 py-1 rounded-md outline-none"
                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                  setSearchParams({ totalItemPage: String(e.target.value) });
-                  setTotalItemPage(e.target.value as any);
+                  setLimit(e.target.value as any);
                }}
             >
                {TOTALOPTIONS.map((option) => (
@@ -40,12 +27,7 @@ function PaginationTable(props: TypePaginationTable) {
          </div>
 
          <div className="">
-            <Pagination
-               currentPage={currentPage}
-               totalPage={10}
-               perPage={searchParams.get('perPage') as any}
-               onClick={setPage}
-            />
+            <Pagination totalPage={props.totalPage} />
          </div>
       </div>
    );

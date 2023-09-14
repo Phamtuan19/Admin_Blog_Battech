@@ -29,6 +29,7 @@ const actionLoginAccount = createAsyncThunk(
 const actionGetUser = createAsyncThunk('auth/getUserInfo', async () => {
    try {
       const res = await authService.getUser();
+      console.log(res);
       return res;
    } catch (error) {
       throw new Error();
@@ -53,7 +54,7 @@ const authSlice = createSlice({
          state.isAuhthentication = true;
       });
       builder.addCase(actionGetUser.fulfilled, (state, action) => {
-         state.user = action.payload.user;
+         // state.user = action.payload?.user;
          state.isAuhthentication = true;
          state.isInitialized = true;
       });

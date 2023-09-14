@@ -1,21 +1,14 @@
 import React from 'react';
 import PaginationItem from './component/PaginationItem';
 import cn from '../../helpers/cn';
-import { useSearchParams } from 'react-router-dom';
+import useSearchParamFilterTableUrl from './hook';
 
-interface TypePaginationList {
-   totalPage: number;
-   currentPage: number;
-   perPage: number;
-   onClick: Function;
-}
+function Pagination(props: { totalPage: number }) {
+   const perPage = 1;
 
-function Pagination(props: TypePaginationList) {
-   const { totalPage, currentPage, perPage, onClick } = props;
+   const { setPage, page: currentPage } = useSearchParamFilterTableUrl();
 
-   const [searchParams, setSearchParams] = useSearchParams();
-
-   const pages = Array.from({ length: totalPage }, (_, index) => index + 1);
+   const pages = Array.from({ length: props.totalPage }, (_, index) => index + 1);
    let ellipsisShown = false; // Biến để kiểm tra xem đã hiển thị '...' chưa
 
    return (
@@ -24,8 +17,7 @@ function Pagination(props: TypePaginationList) {
             active={Boolean(currentPage <= 1)}
             currentPage={currentPage}
             onClick={() => {
-               onClick(currentPage - 1);
-               setSearchParams({ page: String(currentPage - 1) });
+               setPage(String(currentPage - 1));
             }}
          />
          {pages.map((page) => {
@@ -37,19 +29,18 @@ function Pagination(props: TypePaginationList) {
                      active={Boolean(currentPage === page)}
                      children={page}
                      onClick={() => {
-                        setSearchParams({ page: String(page) });
-                        onClick(page);
+                        setPage(String(page));
                      }}
                   />
                );
             }
 
-            if (totalPage > currentPage + perPage && !ellipsisShown) {
+            if (props.totalPage > currentPage + perPage && !ellipsisShown) {
                ellipsisShown = true; // Đánh dấu đã hiển thị '...'
                return <PaginationItem key={page} active={false} children="..." />;
             }
 
-            if (totalPage === page) {
+            if (props.totalPage === page) {
                ellipsisShown = false; // Reset biến khi hiển thị trang cuối
                return (
                   <PaginationItem
@@ -57,19 +48,17 @@ function Pagination(props: TypePaginationList) {
                      active={Boolean(currentPage === page)}
                      children={page}
                      onClick={() => {
-                        setSearchParams({ page: String(page) });
-                        onClick(page);
+                        setPage(String(page));
                      }}
                   />
                );
             }
          })}
          <PaginationNext
-            active={Boolean(currentPage >= totalPage)}
+            active={Boolean(currentPage >= props.totalPage)}
             currentPage={currentPage}
             onClick={() => {
-               onClick(currentPage + 1);
-               setSearchParams({ page: String(currentPage + 1) });
+               setPage(String(currentPage + 1));
             }}
          />
       </div>

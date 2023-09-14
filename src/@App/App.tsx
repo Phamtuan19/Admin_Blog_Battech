@@ -8,9 +8,10 @@ function App() {
    if (!auth.isInitialized) return <LazyLoadingFullScreen />;
 
    return (
-      <BrowserRouter>
-         <Routers />
-      </BrowserRouter>
+      
+         <BrowserRouter>
+            <Routers />
+         </BrowserRouter>
    );
 }
 

@@ -39,6 +39,7 @@ function FormLogin() {
 
    const onSubmitForm = async (data: FormLogin) => {
       try {
+         console.log(data);
          const user = postLogin(data);
          console.log(user);
       } catch (error) {}
@@ -64,7 +65,7 @@ function FormLogin() {
             </div>
             <div className="flex justify-between">
                <div className="flex items-center gap-2">
-                  <input type="checkbox" className="w-auto" id="remember-password"  />
+                  <input type="checkbox" className="w-auto" id="remember-password" />
                   <label htmlFor="remember-password">Nhớ mật khẩu</label>
                </div>
                <div className="">

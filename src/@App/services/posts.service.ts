@@ -3,12 +3,16 @@ import BaseService from '../../@Core/Api/BaseService';
 class PostService extends BaseService {
    BASE_ENDPOINT = 'posts';
 
-   getAllPosts() {
-      return this.get();
+   getAllPosts(data: any) {
+      return this.get(data);
    }
 
    createPost(data: any) {
       return this.request.post(this.BASE_ENDPOINT + '/create', data);
+   }
+
+   deletePost(id: string) {
+      return this.request.delete(this.BASE_ENDPOINT + '/' + id);
    }
 
    getAllTopics() {
