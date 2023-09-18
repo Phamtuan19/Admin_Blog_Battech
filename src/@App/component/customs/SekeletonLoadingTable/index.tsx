@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExtendTdTable } from '../../../pages/Post/component/Table';
+import ExtendTdTable from '../../../component/customs/Table/components/ExtendTdTable';
 
 function index(props: { columns: string[] }) {
    const rows = Array.from({ length: 3 }, (_, index) => index + 1);

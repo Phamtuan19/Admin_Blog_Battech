@@ -3,8 +3,8 @@ import { AxiosInstance } from 'axios';
 import createInstance from './Axios';
 
 class BaseService {
-   //
-   BASE_URL: string = 'https://be-admin-blog-battech.vercel.app/api';
+   //https://be-admin-blog-battech.vercel.app/api
+   BASE_URL: string = import.meta.env.VITE_BASE_URL + 'api';
 
    BASE_ENDPOINT: string = '';
 

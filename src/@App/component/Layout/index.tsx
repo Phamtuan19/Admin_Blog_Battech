@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from './component/Sidebar';
 import cn from '../../../@Core/helpers/cn';
+import React from 'react';
 
 function MainLayout() {
    return (
@@ -12,4 +13,4 @@ function MainLayout() {
       </div>
    );
 }
-export default MainLayout;
+export default React.memo(MainLayout);

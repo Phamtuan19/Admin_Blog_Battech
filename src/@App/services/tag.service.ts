@@ -14,6 +14,10 @@ class TagService extends BaseService {
    deleteTag(id: string) {
       return this.delete(id);
    }
+
+   updateTag(id: string, data: any) {
+      return this.update(data, id);
+   }
 }
 
 const tagService = new TagService();

@@ -1,16 +1,23 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
+
 import postService from '../../../services/posts.service';
 import { images } from '../../../../assets';
-import cn from '../../../../@Core/helpers/cn';
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
-import TableHeader from '../../../component/customs/TableHeader';
-import { format } from 'date-fns';
 import Filter from '../../../component/customs/Filter';
 import TableFooter from '../../../component/customs/TableFooter';
 import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
 import { useConfirm } from '../../../../@Core/component/Comfirm';
-import { Link } from 'react-router-dom';
+import TableHeader from '../../../component/customs/Table/components/TableHeader';
+import ExtendTdTable from '../../../component/customs/Table/components/ExtendTdTable';
+import {
+   ActionCoppyTableItem,
+   ActionDeleteTable,
+   ActionEditTable,
+} from '../../../component/customs/Table/components/TableAction';
+import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
 
 const FILTERACTIONS = [
    {
@@ -31,6 +38,7 @@ function Table() {
    const { page, limit, category, search, sortBy } = useSearchParamFilterTableUrl();
 
    const { setConfirm } = useConfirm();
+   const { setToastMessage } = useToastMessage();
 
    const {
       data: postsList,
@@ -65,30 +73,28 @@ function Table() {
       });
    };
 
-   // const handleClickCoppy = async (id: string) => {
-   //    setConfirm({
-   //       isIcon: true,
-   //       title: 'Sao chép bài viết',
-   //       content: 'Bạn có chắc muốn xóa bài viết này hay không?',
-   //       confirmOk: 'Xóa',
-   //       isButtonOk: true,
-   //       callback: () => {
-   //          try {
-   //             const res = postService.deletePost(id);
-   //             console.log('xóa thành công');
-   //             refetch();
-   //          } catch (error) {
-   //             console.log('Xóa thất bại');
-   //          }
-   //       },
-   //    });
-   // };
+   const handleClickCoppy = async (id?: string) => {
+      setConfirm({
+         isIcon: true,
+         title: 'Sao chép bài viết',
+         content: 'Bạn có chắc muốn coppy bài viết này hay không?',
+         confirmOk: 'Coppy',
+         isButtonOk: true,
+         callback: () => {
+            try {
+               setToastMessage('Tính năng chưa phát triển');
+            } catch (error) {
+               setToastMessage('Có lỗi xảy ra!!!');
+            }
+         },
+      });
+   };
 
    const columns = ['ID', 'Tên bài viết', 'Mô tả', 'Chủ đề', 'Tác giả', 'Ngày đăng bài', 'Thao tác'];
    return (
       <>
          <div className="mb-2 flex justify-between ">
-            <Filter filterActions={FILTERACTIONS} />
+            <Filter filterActions={FILTERACTIONS} defaulCheckFilter="Tên bài viết" />
          </div>
          <div className="">
             <table className="w-full border-collapse bg-white border border-solid border-[#E3E5E8] ">
@@ -103,25 +109,23 @@ function Table() {
                               <ExtendTdTable>
                                  <input type="checkbox" className="w-[15px] h-[15px]" />
                               </ExtendTdTable>
-                              <ExtendTdTable width={50}>{index + 1}</ExtendTdTable>
+                              <ExtendTdTable width={50} className="text-center">
+                                 {index + 1}
+                              </ExtendTdTable>
                               <ExtendTdTable>{post.name}</ExtendTdTable>
                               <ExtendTdTable className="w-[400px]">{post.description}</ExtendTdTable>
                               <ExtendTdTable width={250}>{post.topicId.name}</ExtendTdTable>
-                              <ExtendTdTable width={180}>{post.authorId.name}</ExtendTdTable>
+                              <ExtendTdTable width={180}>
+                                 {(post.authorId && post.authorId.name) || 'Vô danh'}
+                              </ExtendTdTable>
                               <ExtendTdTable className="text-center" width={150}>
                                  {format(new Date(post.createdAt), 'MM/dd/yyyy')}
                               </ExtendTdTable>
                               <ExtendTdTable width={100}>
                                  <div className="flex gap-2 justify-center">
-                                    <span className="cursor-pointer">
-                                       <img src={images.coppy} alt="" />
-                                    </span>
-                                    <Link to={post._id} className="cursor-pointer">
-                                       <img src={images.edit} alt="" />
-                                    </Link>
-                                    <span className="cursor-pointer" onClick={() => handleClickDelete(post._id)}>
-                                       <img src={images.delete1} alt="" />
-                                    </span>
+                                    <ActionCoppyTableItem callback={handleClickCoppy} />
+                                    <ActionEditTable id={post._id} />
+                                    <ActionDeleteTable callback={() => handleClickDelete(post._id)} />
                                  </div>
                               </ExtendTdTable>
                            </tr>
@@ -141,31 +145,5 @@ function Table() {
       </>
    );
 }
-
-type TypeExtendTdTable = React.ComponentProps<'td'> & {
-   children?: React.ReactNode;
-   className?: string;
-};
-
-export const ExtendTdTable = (props: TypeExtendTdTable) => {
-   const { children, className, ...rest } = props;
-
-   return (
-      <td className={cn('text-base p-3 font-medium  border border-solid border-[#E3E5E8] ', className)} {...rest}>
-         <div
-            className="w-full overflow-hidden overflow-ellipsis"
-            style={{
-               display: '-webkit-box',
-               WebkitLineClamp: 1,
-               WebkitBoxOrient: 'vertical',
-               textOverflow: 'ellipsis',
-               whiteSpace: 'normal', // Sử dụng 'normal' thay vì 'nowrap'
-            }}
-         >
-            {children}
-         </div>
-      </td>
-   );
-};
 
 export default React.memo(Table);

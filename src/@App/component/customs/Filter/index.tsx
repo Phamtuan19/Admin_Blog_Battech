@@ -16,18 +16,24 @@ const SORTBYACTIONS = [
    },
 ];
 
-function Filter(props: { filterActions: any }) {
-   const { filterActions } = props;
+interface FilterProps {
+   filterActions: Array<{
+      value: string;
+      title: string;
+   }>;
+   defaulCheckFilter?: string;
+}
+
+function Filter(props: FilterProps) {
+   const { filterActions, defaulCheckFilter } = props;
    const { search, category, sortBy, setSearch, setCategory, setSortBy } = useSearchParamFilterTableUrl();
    const [searchVal, setSearchVal] = useState<string>(search || '');
    const [categoryVal] = useState<string>(category || '');
-
    const handleClickSearch = () => {
       if (searchVal && categoryVal) {
          setSearch(searchVal);
       }
    };
-
    return (
       <>
          <div className="flex gap-3">
@@ -46,7 +52,7 @@ function Filter(props: { filterActions: any }) {
             </div>
             <div className="">
                <Dropdown
-                  defaultValue={category || 'Bộ lọc'}
+                  defaultValue={(categoryVal === 'name' && defaulCheckFilter) || 'Bộ lọc'}
                   options={filterActions}
                   image={images.filter}
                   callback={setCategory}

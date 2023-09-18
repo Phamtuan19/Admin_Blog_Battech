@@ -1,42 +1,18 @@
-import { useMemo } from 'react';
-
-import { useQuery } from 'react-query';
-import postService from '../../services/posts.service';
-import useSearchParamFilterTableUrl from '../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
-import { createColumnHelper } from '../../../@Core/component/Table/hook/createColumnHelper';
-import { useBaseTable } from '../../../@Core/component/Table/hook/useBaseTable';
-import TableCustom from '../../../@Core/component/Table';
+import Button from '../../../@Core/component/Button';
+import { useToastMessage } from '../../redux/slice/toastMessage.slice';
 
 export default function Home() {
-   const { page, limit, category, search, sortBy } = useSearchParamFilterTableUrl();
+   const { setToastMessage } = useToastMessage();
 
-   const { data: dataPost, isLoading } = useQuery('getPost', async () => {
-      const res = await postService.getAllPosts({ page, limit, category, search, sortBy });
-      return res;
-   });
+   const handleClick = (mes: string) => {
+      setToastMessage(mes);
+   };
 
-   const columnsHelper = createColumnHelper();
-
-   const columns = [
-      columnsHelper.accessor({
-         id: '_id',
-         header: 'ID',
-         cell: () => {
-            return <span>name</span>;
-         },
-         render: (_, index) => {
-            return <span>{index + 1}</span>;
-         },
-      }),
-      columnsHelper.accessor({
-         id: 'name',
-         header: 'Tên bài viết',
-      }),
-      columnsHelper.accessor({
-         id: 'slug',
-         header: 'slug',
-      }),
-   ];
-
-   return <TableCustom data={dataPost?.data || []} columns={columns as any} />;
+   // return <TableCustom data={dataPost?.data || []} columns={columns as any} />;
+   return (
+      <>
+         <Button onClick={() => handleClick('Click me!!!')}>Click me!</Button>
+         <Button onClick={() => handleClick('Click ')}>Click me!</Button>
+      </>
+   );
 }

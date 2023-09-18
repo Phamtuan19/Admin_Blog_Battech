@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
+import Account from './Account';
+import SidebarItem from './SidebarItem';
 
 import cn from '../../../../@Core/helpers/cn';
-import logo from './svg/logo.svg';
-import SidebarItem from './SidebarItem';
-import nodeBook from './svg/nodeBook.svg';
-import image from './svg/image.svg';
-import setting from './svg/setting.svg';
-import Account from './Account';
+import logo from '../assets/svg/logo.svg';
+import nodeBook from '../assets/svg/nodeBook.svg';
+import image from '../assets/svg/image.svg';
+import setting from '../assets/svg/setting.svg';
+import React from 'react';
 
 const LISTSIDEBAR = [
    {
@@ -71,4 +72,4 @@ function Sidebar() {
       </div>
    );
 }
-export default Sidebar;
+export default React.memo(Sidebar);

@@ -3,20 +3,20 @@ import { lazy } from 'react';
 import PrivateRouter from './component/PrivateRouter';
 import PublicRouter from './component/PublicRoute';
 import MainLayout from '../component/Layout';
-import EditAuthor from '../pages/EditAuthor';
 
 const Login = lazy(() => import('../pages/Login'));
 const Home = lazy(() => import('../pages/Home'));
-const CreatePost = lazy(() => import('../pages/CreatePost'));
-const TopicPost = lazy(() => import('../pages/TopicPost'));
-const TopicPostCreate = lazy(() => import('../pages/TopicPostCreate'));
-const AuthorCreate = lazy(() => import('../pages/AuthorCreate'));
+const CreatePost = lazy(() => import('../pages/Post/CreatePost'));
+const Topic = lazy(() => import('../pages/Topic'));
+const CreateTopic = lazy(() => import('../pages/Topic/CreateTopic'));
+const CreateAuthor = lazy(() => import('../pages/Author/CreateAuthor'));
+const UpdateAuthor = lazy(() => import('../pages/Author/UpdateAuthor'));
 const Author = lazy(() => import('../pages/Author'));
 const Tag = lazy(() => import('../pages/Tag'));
-const TagCreate = lazy(() => import('../pages/TagCreate'));
 const Post = lazy(() => import('../pages/Post'));
-const EditPost = lazy(() => import('../pages/EditPost'));
-const EditTopic = lazy(() => import('../pages/EditTopic'));
+const CreateTag = lazy(() => import('../pages/Tag/CreateTag'));
+const EditPost = lazy(() => import('../pages/Post/UpdatePost'));
+const UpdateTopic = lazy(() => import('../pages/Topic/UpdateTopic'));
 
 const routes = [
    {
@@ -55,15 +55,15 @@ const routes = [
             children: [
                {
                   index: true,
-                  element: <TopicPost />,
+                  element: <Topic />,
                },
                {
                   path: 'create',
-                  element: <TopicPostCreate />,
+                  element: <CreateTopic />,
                },
                {
                   path: ':topicId',
-                  element: <EditTopic />,
+                  element: <UpdateTopic />,
                },
             ],
          },
@@ -77,11 +77,11 @@ const routes = [
                },
                {
                   path: 'create',
-                  element: <AuthorCreate />,
+                  element: <CreateAuthor />,
                },
                {
                   path: ':authorId',
-                  element: <EditAuthor />,
+                  element: <UpdateAuthor />,
                },
             ],
          },
@@ -95,7 +95,7 @@ const routes = [
                },
                {
                   path: 'create',
-                  element: <TagCreate />,
+                  element: <CreateTag />,
                },
             ],
          },

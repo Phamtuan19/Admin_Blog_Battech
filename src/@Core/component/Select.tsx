@@ -10,7 +10,7 @@ export interface TypeSelect extends SelectHTMLAttributes<HTMLSelectElement> {
    keyTitle: string;
 }
 
-const Select = forwardRef<HTMLSelectElement, TypeSelect>((props, _ref) => {
+const Select = forwardRef<HTMLSelectElement, TypeSelect>((props, ref) => {
    const { CTSize, fullWidth, className, options, keyValue, keyTitle, ...rest } = props;
    return (
       <div
@@ -19,6 +19,7 @@ const Select = forwardRef<HTMLSelectElement, TypeSelect>((props, _ref) => {
          })}
       >
          <select
+            ref={ref}
             className={cn('w-full outline-none rounded-lg ', {
                'p-small': CTSize ? CTSize === 'small' : true,
                'p-normal': CTSize === 'normal',

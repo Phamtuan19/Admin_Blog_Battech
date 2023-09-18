@@ -2,27 +2,26 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
-import { useConfirm } from '../../../../@Core/component/Comfirm';
-import authorService from '../../../services/author.service';
-import Filter from '../../../component/customs/Filter';
-import TableHeader from '../../../component/customs/Table/components/TableHeader';
-import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
 import { images } from '../../../../assets';
+import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
+import TableHeader from '../../../component/customs/Table/components/TableHeader';
 import TableFooter from '../../../component/customs/TableFooter';
-import cn from '../../../../@Core/helpers/cn';
-import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
+import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
+import { useConfirm } from '../../../../@Core/component/Comfirm';
+import topicService from '../../../services/topic.service';
+import Filter from '../../../component/customs/Filter';
 import ExtendTdTable from '../../../component/customs/Table/components/ExtendTdTable';
 import {
    ActionCoppyTableItem,
    ActionDeleteTable,
    ActionEditTable,
 } from '../../../component/customs/Table/components/TableAction';
+import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
 
 const FILTERACTIONS = [
    {
       value: 'name',
-      title: 'Tên bài viết',
+      title: 'Tên chủ đề',
    },
 ];
 
@@ -33,13 +32,13 @@ function Table() {
    const { setToastMessage } = useToastMessage();
 
    const {
-      data: authors,
-      isLoading,
+      data: topics,
+      isFetching,
       refetch,
-   } = useQuery<any>(['getAuthor', page, limit, category, search, sortBy], async () => {
+   } = useQuery<any>(['getTopicAll', page, limit, category, search, sortBy], async () => {
       try {
-         const res = await authorService.getAll({ page, limit, category, search, sortBy });
-         return res.data;
+         const res = await topicService.getAllTopics({ page, limit, category, search, sortBy });
+         return res;
       } catch (error) {
          console.log(error);
          throw error;
@@ -53,11 +52,11 @@ function Table() {
          content: 'Bạn có chắc muốn xóa bài viết này hay không?',
          confirmOk: 'Xóa',
          isButtonOk: true,
-         callback: async () => {
+         callback: () => {
             try {
-               await authorService.deleteAuthor(id);
+               topicService.deleteTopic(id);
                refetch();
-               setToastMessage('xóa thành công', 'success');
+               setToastMessage('Xóa thành công', 'success');
             } catch (error) {
                setToastMessage('Xóa thất bại', 'error');
             }
@@ -82,34 +81,34 @@ function Table() {
       });
    };
 
-   const columns = ['ID', 'Tên tác giả', 'Thao tác'];
+   const columns = ['ID', 'Tên chủ đề', 'Slug', 'số bài viết', 'Thao tác'];
    return (
       <>
          <div className="mb-2 flex justify-between ">
-            <Filter filterActions={FILTERACTIONS} defaulCheckFilter="Tên tác giả" />
+            <Filter filterActions={FILTERACTIONS} defaulCheckFilter="Tên chủ đề" />
          </div>
          <div className="">
             <table className="w-full border-collapse bg-white border border-solid border-[#E3E5E8] ">
                <TableHeader columns={columns} />
                <tbody>
-                  {isLoading ? (
+                  {isFetching ? (
                      <SekeletonLoadingTable columns={columns} />
-                  ) : authors?.data && authors?.data.length > 0 ? (
-                     authors?.data.map((author: any, index: number) => {
+                  ) : topics?.data.data && topics.data.data.length > 0 ? (
+                     topics?.data.data.map((topic: any, index: number) => {
                         return (
                            <tr key={index}>
-                              <ExtendTdTable width={50} className="text-center">
+                              <ExtendTdTable className="text-center">
                                  <input type="checkbox" className="w-[15px] h-[15px]" />
                               </ExtendTdTable>
-                              <ExtendTdTable width={50} className="text-center">
-                                 {index + 1}
-                              </ExtendTdTable>
-                              <ExtendTdTable>{author.name}</ExtendTdTable>
+                              <ExtendTdTable width={50}>{index + 1}</ExtendTdTable>
+                              <ExtendTdTable>{topic.topic.name}</ExtendTdTable>
+                              <ExtendTdTable className="w-[400px]">{topic.topic.slug}</ExtendTdTable>
+                              <ExtendTdTable width={180}>{topic.postCount}</ExtendTdTable>
                               <ExtendTdTable width={100}>
                                  <div className="flex gap-2 justify-center">
                                     <ActionCoppyTableItem callback={handleClickCoppy} />
-                                    <ActionEditTable id={author._id} />
-                                    <ActionDeleteTable callback={() => handleClickDelete(author._id)} />
+                                    <ActionEditTable id={topic._id} />
+                                    <ActionDeleteTable callback={() => handleClickDelete(topic.id)} />
                                  </div>
                               </ExtendTdTable>
                            </tr>
@@ -118,12 +117,12 @@ function Table() {
                   ) : (
                      <tr>
                         <td colSpan={8} className="text-center py-3">
-                           <h1 className="text-lg font-bold">Không có tác giả nào trong danh sách.</h1>
+                           <h1 className="text-lg font-bold">Không có bài viết nào.</h1>
                         </td>
                      </tr>
                   )}
                </tbody>
-               <TableFooter colSpan={columns.length + 1} totalPage={authors?.totalPage || 1} />
+               <TableFooter colSpan={columns.length + 1} totalPage={topics?.totalPage || 1} />
             </table>
          </div>
       </>

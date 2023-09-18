@@ -7,6 +7,10 @@ class TopicService extends BaseService {
       return this.request.get(this.BASE_ENDPOINT + '/all', { params: data });
    }
 
+   getAll() {
+      return this.get();
+   }
+
    createTopic(data: { name: string; slug: string }) {
       return this.request.post(this.BASE_ENDPOINT + '/create', data);
    }

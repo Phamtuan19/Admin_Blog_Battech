@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from '../../services/auth.service';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootReducer } from '../rootReducer';
+import { actionSetToastMessage } from './toastMessage.slice';
 
 interface TypeAuthService<T = any> {
    user: Record<string, T> | null;
@@ -29,8 +31,7 @@ const actionLoginAccount = createAsyncThunk(
 const actionGetUser = createAsyncThunk('auth/getUserInfo', async () => {
    try {
       const res = await authService.getUser();
-      console.log(res);
-      return res;
+      return res as any;
    } catch (error) {
       throw new Error();
    }
@@ -38,8 +39,8 @@ const actionGetUser = createAsyncThunk('auth/getUserInfo', async () => {
 
 const actionLogout = createAsyncThunk('auth/postlogout', async () => {
    try {
-      const res = await authService.postLogout();
-      console.log(res);
+      await authService.postLogout();
+      return;
    } catch (error) {
       throw new Error();
    }
@@ -53,8 +54,8 @@ const authSlice = createSlice({
       builder.addCase(actionLoginAccount.fulfilled, (state, _action) => {
          state.isAuhthentication = true;
       });
-      builder.addCase(actionGetUser.fulfilled, (state, _action) => {
-         // state.user = action.payload?.user;
+      builder.addCase(actionGetUser.fulfilled, (state, action) => {
+         state.user = action.payload.user;
          state.isAuhthentication = true;
          state.isInitialized = true;
       });
@@ -70,7 +71,7 @@ const authSlice = createSlice({
 
 export const useAuth = () => {
    const dispatch: any = useDispatch();
-   const auth = useSelector((state: any) => state.auth);
+   const auth = useSelector((state: RootReducer) => state.auth);
 
    const postLogin = (data: { email: string; password: string }) => {
       dispatch(actionLoginAccount(data));

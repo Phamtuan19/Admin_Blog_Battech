@@ -26,7 +26,7 @@ function Dropdown(props: TypeFilter) {
             <span className="text-sm">{value}</span>
          </Button>
          <div
-            className={cn('absolute top-[101%] right-0 w-32 bg-white py-3 rounded-lg hidden group-hover:block')}
+            className={cn('absolute top-[101%] right-0 w-32 z-[500] bg-white py-3 rounded-lg hidden group-hover:block')}
             style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}
          >
             {options.map((action: { value: string; title: string }, index: number) => {
