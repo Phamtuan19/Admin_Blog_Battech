@@ -1,7 +1,8 @@
 import React from 'react';
-import { DataRow, TableColumn } from '..';
+import { DataRow } from '..';
+import { TypeColumnHelper } from '../hook/createColumnHelper';
 
-function TableBody(props: { data: DataRow[]; columns: TableColumn[] }) {
+function TableBody(props: { data: DataRow[]; columns: TypeColumnHelper[] }) {
    const { data, columns } = props;
 
    return (
@@ -11,9 +12,16 @@ function TableBody(props: { data: DataRow[]; columns: TableColumn[] }) {
                return (
                   <tr key={index}>
                      {columns.map((column, index) => {
+                        if (column.render) {
+                           return (
+                              <th key={index} className="p-3  border border-solid border-[#E3E5E8]">
+                                 {column.render(row, index)}
+                              </th>
+                           );
+                        }
                         return (
                            <th key={index} className="p-3  border border-solid border-[#E3E5E8]">
-                              {row[column.headerItem]}
+                              {row[column.id]}
                            </th>
                         );
                      })}

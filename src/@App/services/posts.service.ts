@@ -3,7 +3,7 @@ import BaseService from '../../@Core/Api/BaseService';
 class PostService extends BaseService {
    BASE_ENDPOINT = 'posts';
 
-   getAllPosts(data: any) {
+   getAllPosts(data?: any) {
       return this.get(data);
    }
 
@@ -22,7 +22,6 @@ class PostService extends BaseService {
    updatePost(id: string, data: any) {
       return this.update(data, id);
    }
-
 }
 
 const postService = new PostService();

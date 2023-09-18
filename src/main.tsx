@@ -1,11 +1,14 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { QueryClientProvider, QueryClient, focusManager } from 'react-query';
+
 import App from './@App/App.tsx';
 import './main.css';
-import { Provider } from 'react-redux';
 import store from './@App/redux/store.ts';
 import InitApp from './@App/component/InitApp.ts';
-import { QueryClientProvider, QueryClient, focusManager } from 'react-query';
 import CoreModalConfirmProvider from './@Core/component/Comfirm/index.tsx';
 
 const queryClient = new QueryClient();
@@ -23,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                </Suspense>
             </QueryClientProvider>
          </Provider>
+         <ToastContainer position="top-right" autoClose={3500} />
       </CoreModalConfirmProvider>
    </React.Fragment>,
 );

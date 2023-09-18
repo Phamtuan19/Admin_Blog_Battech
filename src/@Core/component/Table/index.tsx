@@ -5,27 +5,25 @@ import Button from '../Button';
 
 import search from './image/search.svg';
 import filter from './image/filter.svg';
+import { TypeColumnHelper } from './hook/createColumnHelper';
 
 export interface DataRow {
    [key: string]: any;
 }
 
-export type TableColumn = {
-   headerItem: string;
-   headerName?: string;
-   render?: (props: any) => React.ReactNode;
-};
-
 type TypeTableProps = React.ComponentProps<'table'> & {
-   data: DataRow[];
-   columns: Array<TableColumn>;
+   data: DataRow[] | [];
+   columns: TypeColumnHelper[];
 };
 
-function Table(props: TypeTableProps) {
+// interface TypeTableProps<TData> {
+//    data: Array<TData>;
+//    columns: Array<TData>;
+// }
+
+function TableCustom(props: TypeTableProps) {
    const { data, columns } = props;
-
-   // const dataTable = [data, columns];
-
+   console.log(columns);
    return (
       <div className="my-4 rounded-2xl ">
          <div className="mb-2 flex gap-3">
@@ -39,9 +37,9 @@ function Table(props: TypeTableProps) {
          </div>
          <table className="w-full border-collapse bg-white border border-solid border-[#E3E5E8] ">
             <TableHeader data={data} columns={columns} />
-            <TableBody data={data} columns={columns} />
+            <TableBody data={data} columns={columns || []} />
          </table>
       </div>
    );
 }
-export default Table;
+export default TableCustom;

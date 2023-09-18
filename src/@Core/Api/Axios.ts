@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const createInstance = (baseURL: string) => {
-   const options: any = {
+   const options = {
       baseURL,
       withCredentials: true,
       headers: {
