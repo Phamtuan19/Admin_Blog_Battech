@@ -1,6 +1,4 @@
-import React from 'react';
-import Label from '../../../@Core/component/Label';
-import ControlInput from '../../../@Core/component/ControllForm/ControlInput';
+
 import { useForm } from 'react-hook-form';
 import { MySchema, schemaFrom } from './utils/formTopic';
 import { yupResolver } from '@hookform/resolvers/yup';

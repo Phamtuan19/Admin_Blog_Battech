@@ -1,4 +1,3 @@
-import React from 'react';
 import { images } from '../../../assets';
 import Button from '../../../@Core/component/Button';
 import { MySchema, schemaFrom } from './utils/FormTag';

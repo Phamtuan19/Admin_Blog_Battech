@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 
 import Label from '../../../../@Core/component/Label';
 import ControlTextarea from '../../../../@Core/component/ControllForm/ControlTextarea';

@@ -1,8 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 
-import { images } from '../../../../assets';
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 import TableHeader from '../../../component/customs/Table/components/TableHeader';
 import TableFooter from '../../../component/customs/TableFooter';
@@ -64,7 +62,7 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id?: string) => {
+   const handleClickCoppy = async () => {
       setConfirm({
          isIcon: true,
          title: 'Sao chép bài viết',

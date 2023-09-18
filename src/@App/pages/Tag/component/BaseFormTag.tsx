@@ -1,5 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-
 import Label from '../../../../@Core/component/Label';
 import ControlInput from '../../../../@Core/component/ControllForm/ControlInput';
 import { Control } from 'react-hook-form';

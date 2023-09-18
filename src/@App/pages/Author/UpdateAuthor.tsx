@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../../../@Core/component/Button';
 import { images } from '../../../assets';
 import { MySchema, schemaFrom } from './utils/YupFormAuthor';
@@ -11,7 +10,7 @@ import BaseFormAuthor from './component/BaseFormAuthor';
 function UpdateAuthor() {
    const { authorId } = useParams();
 
-   const { handleSubmit, control, setValue } = useForm<MySchema>({
+   const { handleSubmit, control } = useForm<MySchema>({
       resolver: yupResolver(schemaFrom),
       defaultValues: async () => {
          try {

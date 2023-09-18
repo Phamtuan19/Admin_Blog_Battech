@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import topicService from '../../../services/topic.service';
 import authorService from '../../../services/author.service';
 import tagService from '../../../services/tag.service';

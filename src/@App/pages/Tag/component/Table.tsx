@@ -1,14 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { images } from '../../../../assets';
-import cn from '../../../../@Core/helpers/cn';
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 import TableHeader from '../../../component/customs/Table/components/TableHeader';
 import Filter from '../../../component/customs/Filter';
 import TableFooter from '../../../component/customs/TableFooter';
 import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
 import { useConfirm } from '../../../../@Core/component/Comfirm';
-import { Link } from 'react-router-dom';
 import tagService from '../../../services/tag.service';
 import ExtendTdTable from '../../../component/customs/Table/components/ExtendTdTable';
 import {
@@ -71,7 +68,7 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id?: string) => {
+   const handleClickCoppy = async () => {
       setConfirm({
          isIcon: true,
          title: 'Sao chép bài viết',

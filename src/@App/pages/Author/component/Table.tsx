@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 
 import useSearchParamFilterTableUrl from '../../../../@Core/component/Pagination/hook/useSearchParamFilterTableUrl';
 import { useConfirm } from '../../../../@Core/component/Comfirm';
@@ -8,9 +7,7 @@ import authorService from '../../../services/author.service';
 import Filter from '../../../component/customs/Filter';
 import TableHeader from '../../../component/customs/Table/components/TableHeader';
 import SekeletonLoadingTable from '../../../component/customs/SekeletonLoadingTable';
-import { images } from '../../../../assets';
 import TableFooter from '../../../component/customs/TableFooter';
-import cn from '../../../../@Core/helpers/cn';
 import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
 import ExtendTdTable from '../../../component/customs/Table/components/ExtendTdTable';
 import {
@@ -65,7 +62,7 @@ function Table() {
       });
    };
 
-   const handleClickCoppy = async (id?: string) => {
+   const handleClickCoppy = async () => {
       setConfirm({
          isIcon: true,
          title: 'Sao chép bài viết',

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from '../../services/auth.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from '../rootReducer';
-import { actionSetToastMessage } from './toastMessage.slice';
 
 interface TypeAuthService<T = any> {
    user: Record<string, T> | null;

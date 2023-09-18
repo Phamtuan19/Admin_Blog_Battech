@@ -1,4 +1,3 @@
-import React from 'react';
 import Button from '../../../@Core/component/Button';
 import { images } from '../../../assets';
 import { useForm } from 'react-hook-form';
