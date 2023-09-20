@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from '../../services/auth.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootReducer } from '../rootReducer';
+import { actionSetToastMessage } from './toastMessage.slice';
 
 interface TypeAuthService<T = any> {
    user: Record<string, T> | null;
@@ -17,11 +18,13 @@ const initialState: TypeAuthService = {
 
 const actionLoginAccount = createAsyncThunk(
    'auth/loginAccount',
-   async (data: { email: string; password: string }, _thunkAPI) => {
+   async (data: { email: string; password: string }, action) => {
       try {
          const user = await authService.postLogin(data);
-         return user;
-      } catch (error) {
+         action.dispatch(actionSetToastMessage({ message: 'Đăng nhập thành công!', status: 'success' }));
+         return user as any;
+      } catch (error: any) {
+         action.dispatch(actionSetToastMessage({ message: error.response.data.message, status: 'error' }));
          throw new Error();
       }
    },
@@ -30,17 +33,20 @@ const actionLoginAccount = createAsyncThunk(
 const actionGetUser = createAsyncThunk('auth/getUserInfo', async () => {
    try {
       const res = await authService.getUser();
+
       return res as any;
    } catch (error) {
       throw new Error();
    }
 });
 
-const actionLogout = createAsyncThunk('auth/postlogout', async () => {
+const actionLogout = createAsyncThunk('auth/postlogout', async (_, action) => {
    try {
       await authService.postLogout();
+      action.dispatch(actionSetToastMessage({ message: 'Đăng xuất thành công!', status: 'success' }));
       return;
    } catch (error) {
+      action.dispatch(actionSetToastMessage({ message: 'Đã có lỗi xảy ra!', status: 'error' }));
       throw new Error();
    }
 });
@@ -50,8 +56,11 @@ const authSlice = createSlice({
    initialState,
    reducers: {},
    extraReducers: (builder) => {
-      builder.addCase(actionLoginAccount.fulfilled, (state, _action) => {
-         state.isAuhthentication = true;
+      builder.addCase(actionLoginAccount.fulfilled, (state, action) => {
+         if (action.payload?.user) {
+            state.user = action.payload.user;
+            state.isAuhthentication = true;
+         }
       });
       builder.addCase(actionGetUser.fulfilled, (state, action) => {
          state.user = action.payload.user;

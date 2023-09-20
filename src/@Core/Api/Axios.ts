@@ -25,14 +25,18 @@ const createInstance = (baseURL: string) => {
    axiosInstance.interceptors.response.use(
       // success
       (response) => {
+         console.log(response);
          if (response && response.data) {
             return response.data;
          }
          return response;
       },
       (error) => {
+         // console.log(error.response.data.message);
          // Bất kì mã trạng thái nào lọt ra ngoài tầm 2xx đều khiến hàm này được trigger\
          // Làm gì đó với lỗi response
+         // console.log(error);
+
          return Promise.reject(error);
       },
    );

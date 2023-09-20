@@ -5,8 +5,9 @@ function Login() {
    return (
       <div className="w-full h-[100vh] overflow-hidden flex justify-center items-center">
          <div
-            className="relative w-[1225px] h-[811px] bg-center bg-no-repeat bg-cover flex justify-center items-center"
+            className="relative bg-center w-full h-full bg-no-repeat bg-cover flex justify-center items-center"
             style={{
+               width: 'box-content',
                backgroundImage: `url(${images.bgLoginSvg})`,
             }}
          >
@@ -20,6 +21,5 @@ function Login() {
       </div>
    );
 }
-
 
 export default Login;

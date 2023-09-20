@@ -1,14 +1,18 @@
+import React from 'react';
+
 import PaginationItem from './component/PaginationItem';
 import cn from '../../helpers/cn';
 import useSearchParamFilterTableUrl from './hook/useSearchParamFilterTableUrl';
+import generatePageRange from '../Modal/utlis/generatePageRange';
 
 function Pagination(props: { totalPage: number }) {
-   const perPage = 1;
+   // const { totalPage } = props;
+
+   const totalPage: number = 20;
 
    const { setPage, page: currentPage } = useSearchParamFilterTableUrl();
 
-   const pages = Array.from({ length: props.totalPage }, (_, index) => index + 1);
-   let ellipsisShown = false; // Biến để kiểm tra xem đã hiển thị '...' chưa
+   const perPage = currentPage === 1 ? 2 : 1;
 
    return (
       <div className="flex items-center">
@@ -19,40 +23,16 @@ function Pagination(props: { totalPage: number }) {
                setPage(String(currentPage - 1));
             }}
          />
-         {pages.map((page) => {
-            if (page === currentPage || (page <= currentPage + perPage && page >= currentPage - perPage)) {
-               ellipsisShown = false; // Reset biến khi hiển thị trang thường
-               return (
-                  <PaginationItem
-                     key={page}
-                     active={Boolean(currentPage === page)}
-                     children={page}
-                     onClick={() => {
-                        setPage(String(page));
-                     }}
-                  />
-               );
-            }
-
-            if (props.totalPage > currentPage + perPage && !ellipsisShown) {
-               ellipsisShown = true; // Đánh dấu đã hiển thị '...'
-               return <PaginationItem key={page} active={false} children="..." />;
-            }
-
-            if (props.totalPage === page) {
-               ellipsisShown = false; // Reset biến khi hiển thị trang cuối
-               return (
-                  <PaginationItem
-                     key={page}
-                     active={Boolean(currentPage === page)}
-                     children={page}
-                     onClick={() => {
-                        setPage(String(page));
-                     }}
-                  />
-               );
-            }
-         })}
+         {generatePageRange(currentPage, perPage, totalPage).map((page: any, index: any) => (
+            <PaginationItem
+               key={index}
+               active={Boolean(currentPage === page)}
+               children={page}
+               onClick={() => {
+                  setPage(String(page));
+               }}
+            />
+         ))}
          <PaginationNext
             active={Boolean(currentPage >= props.totalPage)}
             currentPage={currentPage}
@@ -109,4 +89,4 @@ const PaginationNext = (props: { active: boolean; currentPage: number; onClick: 
    );
 };
 
-export default Pagination;
+export default React.memo(Pagination);

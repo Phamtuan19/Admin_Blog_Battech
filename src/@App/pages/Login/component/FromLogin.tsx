@@ -11,6 +11,7 @@ import regexs from '../../../../@Core/config/Regex';
 import Input from '../../../../@Core/component/Input';
 import Label from '../../../../@Core/component/Label';
 import { useAuth } from '../../../redux/slice/auth.slice';
+import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
 
 interface FormLogin {
    email: string;
@@ -37,11 +38,7 @@ function FormLogin() {
    const { postLogin } = useAuth();
 
    const onSubmitForm = async (data: FormLogin) => {
-      try {
-         console.log(data);
-         const user = postLogin(data);
-         console.log(user);
-      } catch (error) {}
+      postLogin(data);
    };
 
    return (
