@@ -6,9 +6,7 @@ import useSearchParamFilterTableUrl from './hook/useSearchParamFilterTableUrl';
 import generatePageRange from '../Modal/utlis/generatePageRange';
 
 function Pagination(props: { totalPage: number }) {
-   // const { totalPage } = props;
-
-   const totalPage: number = 20;
+   const { totalPage } = props;
 
    const { setPage, page: currentPage } = useSearchParamFilterTableUrl();
 
