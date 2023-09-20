@@ -1,4 +1,3 @@
-
 import Label from '../../../../@Core/component/Label';
 import ControlTextarea from '../../../../@Core/component/ControllForm/ControlTextarea';
 import ControlEditor from '../../../../@Core/component/ControllForm/ControlEditor';
@@ -9,13 +8,12 @@ import ControlSelect from '../../../../@Core/component/ControllForm/ControlSelec
 import changeToSlug from '../../../../@Core/helpers/createSlug';
 import { format } from 'date-fns';
 import getActionForm from '../utils/getActionForm';
+import ControlMultiSelect from '../../../../@Core/component/ControllForm/ControlMultiSelect';
 
 export default function BaseFormPost(props: any) {
    const { register, setValue, watch, control, errors } = props;
 
    const dataActionForm = getActionForm();
-
-   console.log(dataActionForm?.[0]);
 
    const handleClickCreateSlug = () => {
       setValue('slug', changeToSlug(watch('name')));
@@ -130,15 +128,14 @@ export default function BaseFormPost(props: any) {
                         />
                      </div>
                      <div className="">
-                        <Label htmlFor="chu-de" required>
-                           Tag
-                        </Label>
-                        <ControlSelect
-                           options={dataActionForm?.[2].data.data || []}
-                           keyValue="_id"
-                           keyTitle="name"
+                        <Label htmlFor="">Tag</Label>
+                        <ControlMultiSelect
                            name="tagId"
+                           _id="_id"
+                           _value="name"
+                           options={dataActionForm?.[2].data.data || []}
                            control={control}
+                           setValue={setValue}
                         />
                      </div>
                   </div>

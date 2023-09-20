@@ -25,7 +25,6 @@ const createInstance = (baseURL: string) => {
    axiosInstance.interceptors.response.use(
       // success
       (response) => {
-         console.log(response);
          if (response && response.data) {
             return response.data;
          }

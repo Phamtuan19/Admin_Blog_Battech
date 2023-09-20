@@ -18,7 +18,7 @@ export const schemaFrom = yup.object().shape({
    image: yup.mixed().required(`Hình ảnh ${ERORR_VALIDATION.required}`),
    topicId: yup.string().required(`Chủ đề ${ERORR_VALIDATION.required}`),
    authorId: yup.string().required(`Tác giả ${ERORR_VALIDATION.required}`),
-   tagId: yup.string().required(`Tag ${ERORR_VALIDATION.required}`),
+   tagId: yup.array().of(yup.string()).min(1, 'Tag không được để trống'),
    publish: yup.string(),
 });
 

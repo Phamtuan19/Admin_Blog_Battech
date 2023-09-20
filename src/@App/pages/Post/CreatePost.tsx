@@ -27,6 +27,7 @@ function CreatePost() {
    });
 
    const onSubmitFrom = async (data: MySchema) => {
+      console.log(data);
       try {
          const fileImage = await getBase64(data.image as File);
 
