@@ -24,6 +24,7 @@ const actionLoginAccount = createAsyncThunk(
          action.dispatch(actionSetToastMessage({ message: 'Đăng nhập thành công!', status: 'success' }));
          return user as any;
       } catch (error: any) {
+         console.log(error);
          action.dispatch(actionSetToastMessage({ message: error.response.data.message, status: 'error' }));
          throw new Error();
       }

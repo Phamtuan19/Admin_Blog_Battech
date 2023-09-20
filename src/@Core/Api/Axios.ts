@@ -4,9 +4,9 @@ const createInstance = (baseURL: string) => {
    const options = {
       baseURL,
       withCredentials: true,
-      headers: {
-         'X-Requested-With': 'XMLHttpRequest',
-      },
+      // headers: {
+      //    'X-Requested-With': 'XMLHttpRequest',
+      // },
    };
 
    const axiosInstance = axios.create(options);

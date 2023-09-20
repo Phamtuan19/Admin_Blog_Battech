@@ -4,7 +4,7 @@ import createInstance from './Axios';
 
 class BaseService {
    //https://be-admin-blog-battech.vercel.app/api
-   BASE_URL: string = 'https://be-admin-blog-battech.vercel.app/api/';
+   BASE_URL: string = 'https://be-admin-blog-battech.vercel.app/api';
    // BASE_URL: string = 'http://localhost:5001/api';
 
    // BASE_URL: string = import.meta.env.BASE_URL;
