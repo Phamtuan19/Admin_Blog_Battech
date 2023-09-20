@@ -11,7 +11,6 @@ import regexs from '../../../../@Core/config/Regex';
 import Input from '../../../../@Core/component/Input';
 import Label from '../../../../@Core/component/Label';
 import { useAuth } from '../../../redux/slice/auth.slice';
-import { useToastMessage } from '../../../redux/slice/toastMessage.slice';
 
 interface FormLogin {
    email: string;

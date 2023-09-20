@@ -1,12 +1,10 @@
-import React from 'react';
+import cn from '../../helpers/cn';
 import PaginationItem from './component/PaginationItem';
 import useSearchParamFilterTableUrl from './hook/useSearchParamFilterTableUrl';
-import { PaginationPrev, PaginationNext } from '.';
 
-export function Pagination(props: { totalPage: number }) {
+export default function Pagination(props: { totalPage: number }) {
    const { totalPage } = props;
    // console.log(totalPage);
-   const totalPage = 10;
 
    const { setPage, page: currentPage } = useSearchParamFilterTableUrl();
 
@@ -68,3 +66,48 @@ export function Pagination(props: { totalPage: number }) {
       </div>
    );
 }
+
+const PaginationPrev = (props: { active: boolean; currentPage: number; onClick: Function }) => {
+   const { active, onClick } = props;
+
+   return (
+      <div
+         className="w-7 h-[30px] bg-white border border-solid border-[#D5D8DD] cursor-pointer"
+         onClick={() => !active && onClick()}
+      >
+         <div className={cn('w-full h-full flex justify-center items-center ')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none">
+               <path
+                  d="M12.5 16.25L6.25 10L12.5 3.75"
+                  stroke={active ? '#C7CBD1' : 'black'}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+               />
+            </svg>
+         </div>
+      </div>
+   );
+};
+const PaginationNext = (props: { active: boolean; currentPage: number; onClick: Function }) => {
+   const { active, onClick } = props;
+
+   return (
+      <div
+         className="w-7 h-[30px] block bg-white border border-solid border-[#D5D8DD] cursor-pointer"
+         onClick={() => !active && onClick()}
+      >
+         <div className={cn(' w-full h-full flex justify-center items-center rotate-180 ')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 20 20" fill="none">
+               <path
+                  d="M12.5 16.25L6.25 10L12.5 3.75"
+                  stroke={active ? '#C7CBD1' : 'black'}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+               />
+            </svg>
+         </div>
+      </div>
+   );
+};
